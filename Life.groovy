@@ -2,7 +2,7 @@ package GameOfLife
 
 class LifeGame {
 	/* Controls the game */
-	List grid = []
+	def grid = []
 	def gridWidth
 	def gridHeight
 	
