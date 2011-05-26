@@ -43,12 +43,14 @@ class LifeGame {
 	{
 		println "Generation $generation"
 		printGrid()
-		def newGrid = new Object[gridWidth][gridHeight]
-		(0..<gridHeight).each { 
+		def newGrid = []
+		(0..<gridHeight).each {
+			def row = []
 			def line = it
 			(0..<gridWidth).each {
-				newGrid[it][line] = liveOrDie(it, line)
+				row[it] = liveOrDie(it, line)
 			}
+			newGrid.add(row)
 		}
 		grid = newGrid
 		
