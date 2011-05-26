@@ -2,7 +2,7 @@ package GameOfLife
 
 class LifeGame {
 	/* Controls the game */
-	def grid
+	List grid = []
 	def gridWidth
 	def gridHeight
 	
@@ -24,12 +24,10 @@ class LifeGame {
 		println "width,height"
 		getGridDimensions()
 		
-		grid = new Object[gridWidth][gridHeight]
 		(0..<gridHeight).each {
-			def line = it
-			(0..<gridWidth).each{
-				grid[it][line] = 0
-			}
+			def row = []
+			(0..<gridWidth).each {row[it] = 0}
+			grid.add(row)
 		}
 	}
 	
