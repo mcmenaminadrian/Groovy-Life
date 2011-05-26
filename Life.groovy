@@ -47,9 +47,7 @@ class LifeGame {
 		(0..<gridHeight).each {
 			def row = []
 			def line = it
-			(0..<gridWidth).each {
-				row[it] = liveOrDie(it, line)
-			}
+			(0..<gridWidth).each {row[it] = liveOrDie(it, line)}
 			newGrid.add(row)
 		}
 		grid = newGrid
@@ -70,7 +68,7 @@ class LifeGame {
 		if (index > 1) {
 			if (mates == 3)
 				return 1
-			else if (grid[x][y] == 1 && mates == 2)
+			else if (grid[y][x] == 1 && mates == 2)
 				return 1
 			else
 				return 0
@@ -78,11 +76,11 @@ class LifeGame {
 		if (!((y + index) in 0..<gridHeight))
 			return score(++index, x, y, mates)
 		if ((x - 1) >= 0)
-			mates += grid[x - 1][y + index]
+			mates += grid[y + index][x - 1]
 		if (index != 0)
-			mates += grid[x][y + index]
+			mates += grid[y + index][x]
 		if ((x + 1) < gridWidth)
-			mates += grid[x + 1][y + index]
+			mates += grid[y + index][x + 1]
 		return score(++index, x, y, mates)
 	}
 	
@@ -116,7 +114,7 @@ class LifeGame {
 			getBeastiePlaces()
 			return
 		}
-		grid[gridW - 1][gridH - 1] = 1;
+		grid[gridH - 1][gridW - 1] = 1;
 		printGrid()
 		println "Next place x,y... or -1,-1 to finish"
 		getBeastiePlaces()
@@ -165,7 +163,7 @@ class LifeGame {
 			def line = it
 			print "|"
 			(0..<gridWidth).each {
-				if (grid[it][line] == 0)
+				if (grid[line][it] == 0)
 					print " "
 				else
 					print "X"
