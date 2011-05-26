@@ -10,6 +10,7 @@ class LifeGame {
 		welcome()
 		printGrid()
 		setupBeasties()
+		evolve(0)
 		
 	}
 	
@@ -38,7 +39,6 @@ class LifeGame {
 		println "Please enter in the format (x, y). Enter -1, -1 to end this phase."
 		getBeastiePlaces()
 		println "Game will now begin..."
-		evolve(0)
 	}
 	
 	void evolve(def generation)
@@ -111,8 +111,7 @@ class LifeGame {
 		def gridH = gridBits[1].toInteger()
 		if ((gridW == -1) && (gridH == -1))
 			return
-		if ((gridW < 1)||(gridW > gridWidth)||(gridH < 1)||
-			(gridH > gridHeight)){
+		if (!(gridW in 1..gridWidth)||!(gridH in 1..gridHeight)){
 			errorXY(gridPoint + " out of range")
 			getBeastiePlaces()
 			return
@@ -146,8 +145,7 @@ class LifeGame {
 		}
 		gridWidth = gridBits[0].toInteger()
 		gridHeight = gridBits[1].toInteger()
-		if ((gridWidth < 1)||(gridWidth > 40)||(gridHeight < 1)||
-			(gridHeight > 40)){
+		if (!(gridWidth in 1..40)||!(gridHeight in 1..40)) {
 			errorXY(gridSize + "out of range")
 			getGridDimensions()
 			}
@@ -159,7 +157,7 @@ class LifeGame {
 	}
 	
 	void printGrid() {
-		(0 .. gridWidth + 1).each {
+		(0..gridWidth + 1).each {
 			print "*"
 		}
 		println()
@@ -175,15 +173,12 @@ class LifeGame {
 			print "|"
 			println()
 		}
-		(0 .. gridWidth + 1).each {
+		(0..gridWidth + 1).each {
 			print "*"
 		}
 		println()
 	}
-	
-
 }
-
 
 def lifer = new LifeGame()
 lifer.run()
