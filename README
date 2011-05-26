@@ -1,0 +1,12 @@
+Crude but working version of Conway's Game of Life
+This code is copyright (C) Adrian McMenamin, 2011
+Use is licensed under the terms of Version 2 of the GNU
+General Public Licence (see http://www.fsf.org)
+NO WARRANTY IS OFFERED UP TO THE LIMIT PROVIDED BY LAW
+
+To use: 
+Specify a grid size up to 40x40
+Enter co-ordinates for your cells
+Enter -1,-1
+and watch...
+
