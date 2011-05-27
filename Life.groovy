@@ -5,13 +5,21 @@ class LifeGame {
 	def grid = []
 	def gridWidth
 	def gridHeight
+	def widthRange
+	def widthRangeEx
+	def heightRange
+	def heightRangeEx
 	
 	void run() {
 		welcome()
 		printGrid()
 		setupBeasties()
-		evolve(0)
-		
+		def i = 0
+		while (true) {
+			evolve(i)
+			Thread.sleep(500)
+			i++
+		}
 	}
 	
 	void welcome() {
@@ -24,9 +32,9 @@ class LifeGame {
 		println "width,height"
 		getGridDimensions()
 		
-		(0..<gridHeight).each {
+		(heightRangeEx).each {
 			def row = []
-			(0..<gridWidth).each {row[it] = 0}
+			(widthRangeEx).each {row[it] = 0}
 			grid.add(row)
 		}
 	}
@@ -44,15 +52,13 @@ class LifeGame {
 		println "Generation $generation"
 		printGrid()
 		def newGrid = []
-		(0..<gridHeight).each {
+		(heightRangeEx).each {
 			def row = []
 			def line = it
-			(0..<gridWidth).each {row[it] = liveOrDie(it, line)}
+			(widthRangeEx).each {row[it] = liveOrDie(it, line)}
 			newGrid.add(row)
 		}
 		grid = newGrid
-		
-		new Timer().runAfter(500, {evolve(++generation)})
 		
 	}
 	
@@ -73,7 +79,7 @@ class LifeGame {
 			else
 				return 0
 		}
-		if (!((y + index) in 0..<gridHeight))
+		if (!((y + index) in heightRangeEx))
 			return score(++index, x, y, mates)
 		if ((x - 1) >= 0)
 			mates += grid[y + index][x - 1]
@@ -109,7 +115,7 @@ class LifeGame {
 		def gridH = gridBits[1].toInteger()
 		if ((gridW == -1) && (gridH == -1))
 			return
-		if (!(gridW in 1..gridWidth)||!(gridH in 1..gridHeight)){
+		if (!(gridW in widthRange)||!(gridH in heightRange)){
 			errorXY(gridPoint + " out of range")
 			getBeastiePlaces()
 			return
@@ -147,6 +153,10 @@ class LifeGame {
 			errorXY(gridSize + "out of range")
 			getGridDimensions()
 			}
+		heightRange = 1..gridHeight
+		widthRange = 1..gridWidth
+		heightRangeEx = 0..<gridHeight
+		widthRangeEx = 0..<gridWidth
 	}
 	
 	void errorXY(String strMsg)
@@ -159,10 +169,10 @@ class LifeGame {
 			print "*"
 		}
 		println()
-		(0..<gridHeight).each {
+		(heightRangeEx).each {
 			def line = it
 			print "|"
-			(0..<gridWidth).each {
+			(widthRangeEx).each {
 				if (grid[line][it] == 0)
 					print " "
 				else
