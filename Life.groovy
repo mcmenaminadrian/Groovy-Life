@@ -1,7 +1,7 @@
 package GameOfLife
 
 /*
-Game of Life - a Grooy implementation of John H. Conway's Game of Life
+Game of Life - a Groovy implementation of John H. Conway's Game of Life
 Copyright (C) 2011 Adrian McMenamin
 
 This program is free software; you can redistribute it and/or
